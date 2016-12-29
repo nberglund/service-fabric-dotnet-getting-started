@@ -23,8 +23,6 @@ The VisualObjects sample provides a visual representation of how actors provide 
 
 It also provides a clear demonstration of how Service Fabric performs rolling upgrades as the behavior of the shapes can be seen to gradually change as the upgrade proceeds across the upgrade domains in the cluster. To see how to perform a rolling upgrade using the Visual Objects sample, see the [application upgrade tutorial][app-upgrade-tutorial].
 
-**Important note:** The VisualObjects web service depends on two JavaScript files that are not directly included in the sample due the licensing restrictions. Follow the instructions in the Readme to learn how to set up the sample.
-
 ## Service Samples
 ### AlphabetPartitions
 
@@ -46,13 +44,22 @@ The partitionKey generation is in the Web.cs file in the solution. This is simpl
 
 ### Chatter
 
-**Important note:** This sample is based on the ASP.NET Core 1 RC1 release and does not work on any other ASP.NET Core 1 release. When running this sample it must be copied to the root directory of your machine to prevent errors in long files names during build and deplpyment. 
-
-Chatter is a single-room chat application. It includes a web UI built in ASP.NET Core 1 and accessible at http://&lt;clusteraddress&gt;:8081/Chatter/. User messages are sent to a stateful service for persistence. When a limit on the number of messages posted is hit, older ones are deleted, with only the latest 50 messages being kept.
+Chatter is currently being upgraded to ASP.NET Core 1.0 and will return soon.
 
 ### WordCount
 
 WordCount provides an introduction to using reliable collections and to partitioning stateful services. A client-side JavaScript function generates random five-character strings, which are then sent to the application via an ASP.NET WebAPI to be counted. The stateless web service resolves the endpoint for the stateful service's partition based on the first character of the string. The stateful service maintains a backlog of words to count in a `ReliableQueue` and then keeps track of their count in a `ReliableDictionary`. The total count, plus a per-partition count, are shown in the web UI at http://&lt;clusteraddress&gt;:8081/WordCount/.
+
+### WCFService
+
+#### Calculator.Service
+Calculator Service provides a way to integrate your existing WCF Services with service fabric framework .This shows how to create Stateless Service using communication as WCF Http binding.
+
+#### Calculator.Client
+This shows how to create WCF Client and how to connect the the service endpoint. 
+CalculatorClient is a Wcf Client uses ClientFactoryBase which in turn provides various features like resolving endpoints during Service Failover  , ExceptionHandling and maintains a cache of communication
+clients and attempts to reuse the clients for requests to the same service endpoint.
+It is using BasicHttpBinding . Any WCF binding can be chosen. It should be compatible with service binding.
 
 ## Guest Executables Samples
 ### SimpleApplication
@@ -62,7 +69,7 @@ The simple guest executable sample shows how to take an arbitrary EXE that is no
 ## Management Samples
 ### ClusterMonitor
 
-ClusterMonitor shows how to use the REST APIs provided by Service Fabric to query the state of the cluster and its running applications. It is also useful as a tool for learning how concepts like partitioning and failover work. The application's web UI is accessible at http://&lt;clusteraddress&gt;:8081/ClusterMonitor/ and shows the cluster with all deployed replicas represented within the node that is currently hosting them.
+ClusterMonitor shows how to use the REST APIs provided by Service Fabric to query the state of the cluster and its running applications. It is also useful as a tool for learning how concepts like partitioning and failover work. The application's web UI is accessible at http://&lt;clusteraddress&gt;:8081/cluster/ and shows the cluster with all deployed replicas represented within the node that is currently hosting them.
 
 To see how Service Fabric automatically rebalances replicas in the cluster when a node fails, do the following:
 
